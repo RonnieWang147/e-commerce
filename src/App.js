@@ -26,18 +26,13 @@ class App extends React.Component {
         const userRef = await creatUserProfileDocument(userAuth);
 
         this.unsubscribeFromSnapshot = userRef.onSnapshot(snapShot => {
-          this.setState(
-            {
-              currentUser: {
-                id: snapShot.id,
-                ...snapShot.data()
-              },
-              isLoading: false
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
             },
-            () => {
-              console.log(this.state.currentUser);
-            }
-          );
+            isLoading: false
+          });
         });
       } else {
         this.setState({ currentUser: null, isLoading: false });
