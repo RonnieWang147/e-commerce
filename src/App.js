@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { auth } from './firebase/firebas.utils';
+import { auth, creatUserProfileDocument } from './firebase/firebas.utils';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shoppage/shop.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
@@ -18,13 +18,35 @@ class App extends React.Component {
     };
   }
   unsubscribeFromAuth = null;
+  unsubscribeFromSnapshot = null;
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user, isLoading: false });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      // this.setState({ currentUser: userAuth, isLoading: false });
+      if (userAuth) {
+        const userRef = await creatUserProfileDocument(userAuth);
+
+        this.unsubscribeFromSnapshot = userRef.onSnapshot(snapShot => {
+          this.setState(
+            {
+              currentUser: {
+                id: snapShot.id,
+                ...snapShot.data()
+              },
+              isLoading: false
+            },
+            () => {
+              console.log(this.state.currentUser);
+            }
+          );
+        });
+      } else {
+        this.setState({ currentUser: null, isLoading: false });
+      }
     });
   }
   componentWillUnmount() {
     this.unsubscribeFromAuth();
+    this.unsubscribeFromSnapshot();
   }
   render() {
     if (this.state.isLoading) return null;
