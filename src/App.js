@@ -37,7 +37,8 @@ class App extends React.Component {
     this.unsubscribeFromSnapshot();
   }
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, isLoading } = this.props;
+    if (isLoading) return null;
     return (
       <>
         <Header />
@@ -58,8 +59,9 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user: { currentUser, isLoading } }) => ({
+  currentUser,
+  isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

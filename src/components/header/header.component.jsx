@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { auth } from '../../firebase/firebas.utils';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, showCartDropDown, toggleDropdown }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -22,6 +24,7 @@ const Header = ({ currentUser }) => (
         <div className="option" onClick={() => auth.signOut()}>
           SIGN OUT
         </div>
+        <CartIcon />
       </div>
     ) : (
       <div className="options">
@@ -30,9 +33,15 @@ const Header = ({ currentUser }) => (
         </Link>
       </div>
     )}
+    {showCartDropDown && <CartDropDown />}
   </div>
 );
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({
+  user: { currentUser },
+  cart: { showCartDropDown }
+}) => ({
+  currentUser: currentUser,
+  showCartDropDown: showCartDropDown
 });
+
 export default connect(mapStateToProps)(Header);
