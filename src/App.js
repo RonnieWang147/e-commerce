@@ -6,6 +6,8 @@ import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shoppage/shop.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { setCurrentUser } from './redux/user/user.actions';
+import { selectCurrentUser, selectIsLoading } from './redux/user/user.selector';
+import Spinner from './components/spinner/spinner.component';
 
 import Header from './components/header/header.component';
 import './App.css';
@@ -38,7 +40,12 @@ class App extends React.Component {
   }
   render() {
     const { currentUser, isLoading } = this.props;
-    if (isLoading) return null;
+    if (isLoading)
+      return (
+        <div className="spinner">
+          <Spinner />
+        </div>
+      );
     return (
       <>
         <Header />
@@ -59,9 +66,9 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps = ({ user: { currentUser, isLoading } }) => ({
-  currentUser,
-  isLoading
+const mapStateToProps = state => ({
+  currentUser: selectCurrentUser(state),
+  isLoading: selectIsLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({
