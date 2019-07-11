@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { auth, creatUserProfileDocument } from './firebase/firebas.utils';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shoppage/shop.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
@@ -66,9 +68,9 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  currentUser: selectCurrentUser(state),
-  isLoading: selectIsLoading(state)
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  isLoading: selectIsLoading
 });
 
 const mapDispatchToProps = dispatch => ({
