@@ -13,8 +13,6 @@ code {
 }
 
 #root {
-  width: 80vw;
-  max-width: 1600px;
   margin: auto;
   padding: 20px 80px;
 }

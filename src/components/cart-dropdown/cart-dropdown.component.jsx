@@ -14,7 +14,7 @@ import './cart-dropdown.styles.scss';
 const CartDropdown = ({
   cartItems,
   history,
-  dispatch /* if the 2nd argument do not pass in connect() we will have dispatch() in props  */
+  dispatch /* if the 2nd argument is not passed in connect() we will have dispatch() in props  */
 }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
@@ -23,7 +23,7 @@ const CartDropdown = ({
           <CartItem key={cartItem.id} item={cartItem} />
         ))
       ) : (
-        <span className="empty-message">No items in your cart</span>
+        <span className="empty-message">Your cart is empty</span>
       )}
     </div>
     <CustomButton

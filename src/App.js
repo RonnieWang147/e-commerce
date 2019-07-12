@@ -56,7 +56,7 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
@@ -66,7 +66,7 @@ class App extends React.Component {
               else return <SignInAndSignUp />;
             }}
           />
-          <Route path="/" render={() => <div>404 not found</div>} />
+          {/* <Route path="/" render={() => <div>404 not found</div>} /> */}
         </Switch>
       </>
     );
