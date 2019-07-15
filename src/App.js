@@ -12,7 +12,6 @@ import CheckoutPage from './pages/checkout/checkout.component';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser, selectIsLoading } from './redux/user/user.selector';
 
-import Spinner from './components/spinner/spinner.component';
 import {
   SpinnerOverlay,
   SpinnerContainer
