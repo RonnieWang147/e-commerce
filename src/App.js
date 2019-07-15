@@ -66,7 +66,7 @@ class App extends React.Component {
               else return <SignInAndSignUp />;
             }}
           />
-          {/* <Route path="/" render={() => <div>404 not found</div>} /> */}
+          <Route path="/" render={() => <div>404 not found</div>} />
         </Switch>
       </>
     );
