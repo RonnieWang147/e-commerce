@@ -13,6 +13,10 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser, selectIsLoading } from './redux/user/user.selector';
 
 import Spinner from './components/spinner/spinner.component';
+import {
+  SpinnerOverlay,
+  SpinnerContainer
+} from './components/with-spinner/with-spinner.styles';
 import Header from './components/header/header.component';
 
 import './App.css';
@@ -47,9 +51,9 @@ class App extends React.Component {
     const { currentUser, isLoading } = this.props;
     if (isLoading)
       return (
-        <div className="spinner">
-          <Spinner />
-        </div>
+        <SpinnerOverlay>
+          <SpinnerContainer />
+        </SpinnerOverlay>
       );
     return (
       <>
