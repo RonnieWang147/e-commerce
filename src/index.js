@@ -13,6 +13,7 @@ ReactDOM.render(
     <BrowserRouter>
       <PersistGate persistor={persistor}>
         <App />
+        {console.log('abc')}
       </PersistGate>
     </BrowserRouter>
   </Provider>,
