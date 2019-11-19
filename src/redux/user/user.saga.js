@@ -8,7 +8,7 @@ import { createUserProfileDocument } from '../../firebase/firebas.utils';
 
 function* getSnapShotFromUserAuth(user) {
   try {
-    const userRef = yield createUserProfileDocument(user);
+    const userRef = yield call(createUserProfileDocument, user);
     const userSnapshot = yield userRef.get();
     yield put(
       SignInSuccess({
