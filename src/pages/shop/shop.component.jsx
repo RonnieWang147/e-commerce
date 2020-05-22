@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
-import CollectionsOverviewContainer from '../../components/collections-overview/collection-overview.container';
+import CollectionOverviewContainer from '../../components/collections-overview/collection-overview.container';
 import CollectionPageContainer from '../collection/collection.container';
 
 import './shop.styles.scss';
@@ -21,7 +21,7 @@ class ShopPage extends React.Component {
         <Route
           exact
           path={match.path}
-          component={CollectionsOverviewContainer}
+          component={CollectionOverviewContainer}
         />
         <Route
           exact
@@ -32,10 +32,7 @@ class ShopPage extends React.Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
+const mapDispatchToProps = (dispatch) => ({
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
-export default connect(
-  null,
-  mapDispatchToProps
-)(ShopPage);
+export default connect(null, mapDispatchToProps)(ShopPage);
